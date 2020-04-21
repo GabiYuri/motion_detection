@@ -4,9 +4,6 @@
 using namespace std;
 using namespace cv;
 
-//bool frame__compare(Mat frame1, Mat frame2){
-
-//}
 int main(){
 
     VideoCapture cap(0);
@@ -16,12 +13,12 @@ int main(){
     Mat frame, next_frame;
     Mat frame_g, next_frame_g;
     Mat compare;
-    bool movimento;
+    bool movimento = false;
 
     while(1){
         
         int i = 0;
-        movimento = false;
+        //movimento = false;
 
         cap.read(frame);
         cvtColor(frame, frame_g, COLOR_BGR2GRAY);
@@ -39,27 +36,12 @@ int main(){
         if(frame_g.data and next_frame_g.data){
             for(int i = 0; i < compare.rows; i++){
                 for(int j = 0; j < compare.cols; j++){
-                    if (compare.at<uchar>(i,j) > 50){
+                    if (compare.at<uchar>(i,j) > 40){
                         movimento = true;
                     }
                 }
-            }
-            /*if (i > 20){
-                movimento = true;
-            }*/
-            /*if(movimento == true){
-                cout << "Movimento!" << endl;
-            }
-            else{
-                cout << "Sem movimento!" << endl;
-            }
+            }  
         }
-        else{
-            cout << "Sem imagem!" << endl;
-        }*/
-        
-        //if(waitKey(0) == 's') break;
-        
     }
 
     if(movimento == true){
